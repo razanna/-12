@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *ptr = malloc(sizeof(int));  // выделяем память под один int
+    if (ptr == NULL) {
+        printf("Ошибка выделения памяти\n");
+        return 1;
+    }
+    *ptr = 42;  // записываем значение
+    printf("Значение: %d\n", *ptr);
+    free(ptr);  // освобождаем память
+    ptr = NULL; // обнуляем указатель
+    return 0;
+}
