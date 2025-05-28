@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main() {
+    char *buf = malloc(10);
+    if (!buf) return 1;
+    strcpy(buf, "Это строка длиннее 10 символов!"); // переполнение
+    printf("%s\n", buf);
+    free(buf);
+    return 0;
+}
