@@ -1,0 +1,27 @@
+section .data
+    length equ 4096
+
+section .text
+    global _start
+
+_start:
+    ; вызов mmap
+    mov rax, 9          ; syscall number for mmap
+    xor rdi, rdi        ; addr = NULL
+    mov rsi, length     ; length
+    mov rdx, 3          ; PROT_READ | PROT_WRITE
+    mov r10, 0x22       ; MAP_PRIVATE | MAP_ANONYMOUS
+    mov r8, -1          ; fd = -1
+    xor r9, r9          ; offset = 0
+    syscall
+
+    ; сохранение адреса mmap в rdi для munmap
+    mov rdi, rax
+    mov rax, 11         ; syscall number for munmap
+    mov rsi, length
+    syscall
+
+    ; выход из программы
+    mov rax, 60         ; syscall exit
+    xor rdi, rdi
+    syscall
